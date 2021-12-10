@@ -15,15 +15,14 @@ async def start(bot, message):
         await message.reply(INVITE_MSG)
     else:
         buttons = [
-        [
-           InlineKeyboardButton('Search Again 🔍', switch_inline_query_current_chat=query),
-           InlineKeyboardButton('Share Bot 🔥', url=url),
-        ],
-        [
-           InlineKeyboardButton('Updates Channel 🔔 ', url='https://t.me/AccessAdminBot_AL'),
-           InlineKeyboardButton('Subscribe To Help 🤖 ', url='https://t.me/AnimeListUp'),
-        ],
-    ]
+            [
+                InlineKeyboardButton('Updates Channel 🔔', url='https://t.me/AccessAdminBot_AL'),
+                InlineKeyboardButton('Go Inline 🙃', switch_inline_query=''),
+            ],
+            [
+                InlineKeyboardButton('Search File  🔎', switch_inline_query_current_chat=''),
+            ],
+        ]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply(START_MSG, reply_markup=reply_markup)
 
