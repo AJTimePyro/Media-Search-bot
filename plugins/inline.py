@@ -72,13 +72,15 @@ async def answer(bot, query):
 
 def get_reply_markup(username, query):
     url = 't.me/share/url?url=' + quote(SHARE_BUTTON_TEXT.format(username=username))
-    buttons = [[
-        InlineKeyboardButton('Search Again 🔍', switch_inline_query_current_chat=query),
-        InlineKeyboardButton('Share Bot 🔥', url=url),
-    ]],
-     [
+    buttons = [
+        [
+           InlineKeyboardButton('Search Again 🔍', switch_inline_query_current_chat=query),
+           InlineKeyboardButton('Share Bot 🔥', url=url),
+        ],
+
+        [
            InlineKeyboardButton('Updates Channel 🔔 ', url='https://t.me/AccessAdminBot_AL'),
-           InlineKeyboardButton('Subscribe To Help 🤖 ', url='https://t.me/AnimeListUp'),
+           InlineKeyboardButton('Subscribe To help 🤖 ', url='https://t.me/AnimeListUp'),
         ],
     ]
     return InlineKeyboardMarkup(buttons)
