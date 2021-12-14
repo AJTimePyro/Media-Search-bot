@@ -99,14 +99,14 @@ def get_size(size):
 
 
 async def is_subscribed(bot, query):
-    try:
-        user = await bot.get_chat_member(AUTH_CHANNEL, query.from_user.id)
-    except UserNotParticipant:
-        pass
-    except Exception as e:
-        logger.exception(e)
-    else:
-        if not user.status == 'kicked':
-            return True
-
+    for channel in AUTH_CHANNEL:
+        try:
+            user = await bot.get_chat_member(channel, query.from_user.id)
+        except UserNotParticipant:
+            pass
+        except Exception as e:
+            logger.exception(e)
+        else:
+            if not user.status == 'kicked':
+                return True
     return False
