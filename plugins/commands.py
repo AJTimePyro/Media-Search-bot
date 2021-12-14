@@ -3,7 +3,7 @@ import logging
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from info import START_MSG, CHANNELS, ADMINS, INVITE_MSG, INVITE_LINK
-from utils import Media
+from utils import Media, checking_user_in_db
 
 logger = logging.getLogger(__name__)
 

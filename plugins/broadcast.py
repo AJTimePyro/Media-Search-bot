@@ -14,17 +14,14 @@ async def broadcastHandler(bot, message):
     ALLCHATS = [document['userid'] for document in collection_user.find()]
     SUCE = 0
     FAIL = 0
-    BlOCK = 0
     for chat in ALLCHATS:
         try:
             await MSG.copy(chat)
             SUCE += 1
-        except UserIsBlocked:
-            BlOCK += 1
         except Exception as e:
             FAIL += 1
     await message.reply_text(
-        f"Successfully Broadcasted to {SUCE} Chats\nFailed - {FAIL} Chats\nBlocked - {BLOCK} !"
+        f"Successfully Broadcasted to {SUCE} Chats\nFailed - {FAIL} Chats!"
     )
     await m.delete()
 
