@@ -103,10 +103,12 @@ async def is_subscribed(bot, query):
         try:
             user = await bot.get_chat_member(channel, query.from_user.id)
         except UserNotParticipant:
-            pass
+            return False
         except Exception as e:
             logger.exception(e)
         else:
-            if not user.status == 'kicked':
-                return True
-    return False
+            if user.status == 'kicked':
+                return False
+    else:
+        return False
+
