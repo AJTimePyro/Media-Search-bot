@@ -110,5 +110,5 @@ async def is_subscribed(bot, query):
             if user.status == 'kicked':
                 return False
     else:
-        return False
+        return True
 
