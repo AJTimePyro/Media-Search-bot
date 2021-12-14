@@ -4,6 +4,7 @@ import logging
 from struct import pack
 
 from pyrogram.file_id import FileId
+from pymongo import MongoClient
 from pymongo.errors import DuplicateKeyError
 from umongo import Instance, Document, fields
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -17,6 +18,10 @@ logger.setLevel(logging.INFO)
 client = AsyncIOMotorClient(DATABASE_URI)
 db = client[DATABASE_NAME]
 instance = Instance.from_db(db)
+
+mongo_client = MongoClient(DATABASE_URI)
+db_user = mongo_client[DATABASE_NAME]
+collection_user = db_user['members']
 
 
 @instance.register
@@ -136,3 +141,10 @@ def unpack_new_file_id(new_file_id):
     )
     file_ref = encode_file_ref(decoded.file_reference)
     return file_id, file_ref
+
+def checking_user_in_db(userid):
+    document = {'userid' : userid}
+    if not collection_user.find_one(document):
+        collection_user.insert_one(document)
+    return
+
