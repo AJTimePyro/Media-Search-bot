@@ -28,3 +28,10 @@ async def broadcastHandler(bot, message):
     )
     await m.delete()
 
+@Client.on_message(filters.command("stats") & filters.user(ADMINS))
+async def gistat(_, message):
+    count = 0
+    for document in collection_user.find():
+        count += 1
+    await message.reply_text(f"Total Chats in Database - {count}", quote=True)
+
