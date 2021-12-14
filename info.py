@@ -22,7 +22,7 @@ auth_users = [int(user) if id_pattern.search(user) else user for user in environ
 AUTH_USERS = (auth_users + ADMINS) if auth_users else []
 auth_channel = environ.get('AUTH_CHANNEL')
 if ',' in auth_channel:
-    AUTH_CHANNEL = list(auth_channel.split(','))
+    AUTH_CHANNEL = list(map(int, list(auth_channel.split(','))))
 else:
     AUTH_CHANNEL = [auth_channel]
 
