@@ -21,7 +21,16 @@ CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ['CHANNELS
 auth_users = [int(user) if id_pattern.search(user) else user for user in environ.get('AUTH_USERS', '').split()]
 AUTH_USERS = (auth_users + ADMINS) if auth_users else []
 auth_channel = environ.get('AUTH_CHANNEL')
-AUTH_CHANNEL = int(auth_channel) if auth_channel and id_pattern.search(auth_channel) else auth_channel
+if ',' in auth_channel:
+    AUTH_CHANNEL = list(auth_channel.split(','))
+else:
+    AUTH_CHANNEL = [auth_channel]
+
+invite_link = environ.get('INVITE_LINK')
+if ',' in auth_channel:
+    INVITE_LINK = list(invite_link.split(','))
+else:
+    INVITE_LINK = [invite_link]
 
 # MongoDB information
 DATABASE_URI = environ['DATABASE_URI']
@@ -37,4 +46,4 @@ Here you can search files in inline mode. Just press following buttons and start
 
 START_MSG = environ.get('START_MSG', default_start_msg)
 SHARE_BUTTON_TEXT = 'Checkout {username} for searching files'
-INVITE_MSG = environ.get('INVITE_MSG', 'Please join @.... to use this bot')
+INVITE_MSG = environ.get('INVITE_MSG', 'To Use This Bot You have to join Following Channels.')

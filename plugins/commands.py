@@ -2,7 +2,7 @@ import os
 import logging
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from info import START_MSG, CHANNELS, ADMINS, INVITE_MSG
+from info import START_MSG, CHANNELS, ADMINS, INVITE_MSG, INVITE_LINK
 from utils import Media
 
 logger = logging.getLogger(__name__)
@@ -12,7 +12,21 @@ logger = logging.getLogger(__name__)
 async def start(bot, message):
     """Start command handler"""
     if len(message.command) > 1 and message.command[1] == 'subscribe':
-        await message.reply(INVITE_MSG)
+        btn = []
+        twoBtn = []
+        count = 0
+        for invite in INVITE_LINK:
+            if count == 2:
+                count = 1
+                btn.append(twoBtn)
+                twoBtn = []
+            else:
+                count += 1
+            twoBtn.append(InlineKeyboardButton('Join Community', url=invite))
+        else:
+            if twoBtn:
+                btn.append(twoBtn)
+        await message.reply(INVITE_MSG, reply_markup = InlineKeyboardMarkup(btn))
     else:
         buttons = [
             [
